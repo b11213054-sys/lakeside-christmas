@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>湖畔聖誕 · Lakeside Christmas</title>
+<meta name="description" content="在靜謐的湖光山色裡，與你一起迎接這個溫柔的聖誕節。">
+<meta property="og:title" content="湖畔聖誕 · Lakeside Christmas">
+<meta property="og:description" content="在靜謐的湖光山色裡，與你一起迎接這個溫柔的聖誕節。">
+<meta property="og:image" content="lakeside.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9D%84%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('has-js');</script>
+</head>
+<body>
+
+<!-- 飄雪畫布 -->
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<!-- 背景光暈 -->
+<div class="aurora" aria-hidden="true">
+  <span class="glow glow-a"></span>
+  <span class="glow glow-b"></span>
+  <span class="glow glow-c"></span>
+</div>
+
+<!-- 頂部燈飾 -->
+<div class="garland" aria-hidden="true">
+  <svg viewBox="0 0 1200 140" preserveAspectRatio="none">
+    <path class="wire" d="M-20,10 Q600,150 1220,10" />
+    <g class="bulbs">
+      <circle cx="60"  cy="38"  r="9" style="--d:0s;--c:#ffd98a" />
+      <circle cx="160" cy="62"  r="9" style="--d:.4s;--c:#ff8f7a" />
+      <circle cx="262" cy="80"  r="9" style="--d:.8s;--c:#9ff5d8" />
+      <circle cx="365" cy="92"  r="9" style="--d:1.2s;--c:#ffe6a8" />
+      <circle cx="470" cy="99"  r="9" style="--d:1.6s;--c:#ff9ea8" />
+      <circle cx="575" cy="102" r="9" style="--d:2s;--c:#a8e6ff" />
+      <circle cx="680" cy="102" r="9" style="--d:.2s;--c:#ffd98a" />
+      <circle cx="785" cy="99"  r="9" style="--d:.6s;--c:#b5ffd9" />
+      <circle cx="890" cy="92"  r="9" style="--d:1s;--c:#ffb3a1" />
+      <circle cx="993" cy="80"  r="9" style="--d:1.4s;--c:#ffe6a8" />
+      <circle cx="1095" cy="62" r="9" style="--d:1.8s;--c:#a8e6ff" />
+      <circle cx="1190" cy="38" r="9" style="--d:2.2s;--c:#ffd98a" />
+    </g>
+  </svg>
+</div>
+
+<!-- 吊掛飾品 -->
+<div class="ornaments" aria-hidden="true">
+  <div class="ornament o1"><i></i></div>
+  <div class="ornament o2"><i></i></div>
+  <div class="ornament o3"><i></i></div>
+</div>
+
+<header class="nav">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.6 5.2L19 8.8l-4 3.4 1.2 5.3L12 14.6 7.8 17.5 9 12.2 5 8.8l5.4-1.6z"/></svg>
+    <span>湖畔聖誕</span>
+  </a>
+  <nav class="links">
+    <a href="#story">湖畔</a>
+    <a href="#gallery">相片</a>
+    <a href="#share">祝福</a>
+  </nav>
+  <button class="snow-toggle" id="snowToggle" type="button" aria-pressed="true">
+    <span class="dot"></span><span class="label">下雪中</span>
+  </button>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <p class="eyebrow">December · 12 · 25</p>
+      <h1>
+        <span class="line">Merry</span>
+        <span class="line accent">Christmas</span>
+      </h1>
+      <p class="cn-title">聖 誕 快 樂</p>
+      <p class="lead">在靜謐的湖光山色裡，與你一起迎接<br class="sp">這個溫柔又閃亮的聖誕節。</p>
+
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="unit"><strong data-days>--</strong><span>天</span></div>
+        <div class="unit"><strong data-hours>--</strong><span>時</span></div>
+        <div class="unit"><strong data-minutes>--</strong><span>分</span></div>
+        <div class="unit"><strong data-seconds>--</strong><span>秒</span></div>
+      </div>
+      <p class="countdown-label" id="countdownLabel">距離聖誕節</p>
+
+      <a class="scroll-hint" href="#story">
+        <span>往下走，遇見湖畔的冬天</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v14M6 13l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- 湖畔故事 -->
+  <section class="section story" id="story">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="kicker">The Lake in Winter</p>
+        <h2>安靜的湖，<br>藏著一整年的溫柔</h2>
+      </div>
+
+      <div class="story-grid">
+        <p class="story-text reveal">
+          松針垂在畫面上方，像誰悄悄替這片湖掛上了耶誕花圈。湖水帶著土耳其藍的色澤，
+          清澈得能看見水底的卵石，遠方的山影靜靜躺在水面，連風都放輕了腳步。
+        </p>
+        <p class="story-text reveal" style="--delay:.1s">
+          長椅空著，像是在等一個人。今年聖誕，就把這份安靜的祝福送給遠方的人吧——
+          願你走過的路都有光，願你想起的人都在笑。
+        </p>
+      </div>
+
+      <ul class="facts reveal">
+        <li><strong>12°C</strong><span>湖邊的氣溫</span></li>
+        <li><strong>1,340 m</strong><span>山與湖的高度</span></li>
+        <li><strong>∞</strong><span>想給你的祝福</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 相片 -->
+  <section class="section gallery" id="gallery">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="kicker">Two Frames</p>
+        <h2>同一片湖，兩種心情</h2>
+        <p class="sub">一張留給自己收藏，一張加上 QR Code，把祝福寄給朋友。</p>
+      </div>
+
+      <div class="cards">
+        <figure class="card reveal" data-lightbox data-full="lakeside.jpg" tabindex="0" role="button" aria-label="放大檢視原圖">
+          <div class="card-media">
+            <img src="lakeside.jpg" alt="冬日湖畔，松樹下望著藍綠色湖水的長椅" loading="lazy" width="640" height="427">
+            <span class="card-shine" aria-hidden="true"></span>
+            <span class="zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21M11 8v6M8 11h6"/></svg>
+            </span>
+          </div>
+          <figcaption>
+            <h3>Original · 湖畔的長椅</h3>
+            <p>松枝、湖水與一張空著的椅子，是這個季節最安靜的風景。</p>
+          </figcaption>
+        </figure>
+
+        <figure class="card reveal" style="--delay:.12s" data-lightbox data-full="lakeside-qr.jpg" tabindex="0" role="button" aria-label="放大檢視含 QR Code 的版本">
+          <div class="card-media">
+            <img src="lakeside-qr.jpg" alt="同一張湖畔照片，左上角加上白色 QR Code" loading="lazy" width="640" height="427">
+            <span class="card-shine" aria-hidden="true"></span>
+            <span class="badge">含 QR Code</span>
+            <span class="zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21M11 8v6M8 11h6"/></svg>
+            </span>
+          </div>
+          <figcaption>
+            <h3>Share · 掃描祝福</h3>
+            <p>把 QR Code 印在卡片上，讓收到的人一掃，就走進這片湖。</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- QR 分享 -->
+  <section class="section share" id="share">
+    <div class="wrap share-inner">
+      <div class="qr-card reveal">
+        <div class="qr-frame">
+          <img src="qr-code.png" alt="照片中的 QR Code，可掃描分享" width="472" height="472">
+        </div>
+        <span class="qr-spark" aria-hidden="true"></span>
+      </div>
+
+      <div class="share-text reveal" style="--delay:.1s">
+        <p class="kicker">Scan &amp; Share</p>
+        <h2>把這片湖，<br>寄給想念的人</h2>
+        <p>
+          拿起手機掃描左側的 QR Code，就能把這份聖誕祝福分享出去。
+          不需要華麗的包裝，一片安靜的湖、一張空著的長椅，
+          就足夠說出「聖誕快樂」。
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="lakeside-qr.jpg" download="lakeside-christmas.jpg">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M5 20h14"/></svg>
+            下載分享版照片
+          </a>
+          <button class="btn btn-ghost" type="button" id="greetBtn">✨ 點亮一句祝福</button>
+        </div>
+        <p class="greeting" id="greeting" aria-live="polite">願你的聖誕夜，有著湖水一樣清澈的好夢。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 結尾 -->
+  <section class="closing">
+    <div class="closing-inner reveal">
+      <p class="kicker">With Love</p>
+      <h2 class="closing-title">願你有雪、有光、<br>有人陪你過聖誕。</h2>
+      <div class="divider" aria-hidden="true">
+        <span></span>
+        <svg viewBox="0 0 24 24"><path d="M12 2l1.6 5.2L19 8.8l-4 3.4 1.2 5.3L12 14.6 7.8 17.5 9 12.2 5 8.8l5.4-1.6z"/></svg>
+        <span></span>
+      </div>
+      <p class="sign">Merry Christmas &amp; 湖畔聖誕</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© <span id="year">2026</span> Lakeside Christmas · 用一點雪、一點光，還有一片湖。</p>
+  <p class="tiny">Photos · 湖畔的冬天　｜　Made with ❄ &amp; ♥</p>
+</footer>
+
+<!-- 燈箱 -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="相片檢視" hidden>
+  <button class="lb-close" id="lbClose" type="button" aria-label="關閉">✕</button>
+  <img id="lbImage" src="" alt="">
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
